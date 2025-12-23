@@ -1,194 +1,194 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
+ -- Keymaps are automatically loaded on the VeryLazy event
+ -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+ -- Add any additional keymaps here
 
--- Go to the first non-blank character of the line
-vim.keymap.set("n", "H", "^", { desc = "Go to beginning of line" })
+ -- Go to the first non-blank character of the line
+ vim.keymap.set("n", "H", "^", { desc = "Go to beginning of line" })
 
--- Go to the end of the line
-vim.keymap.set("n", "L", "$", { desc = "Go to end of line" })
+ -- Go to the end of the line
+ vim.keymap.set("n", "L", "$", { desc = "Go to end of line" })
 
-vim.keymap.set("n", "<leader>td", ":ToggleTerm dir=%:p:h<CR>")
+ vim.keymap.set("n", "<leader>td", ":ToggleTerm dir=%:p:h<CR>")
 
--- Toggle copilot
-vim.keymap.set("n", "<leader>gh", ":CopilotChat<CR>")
-
-
--- This file is automatically loaded by lazyvim.config.init
-
--- DO NOT USE `LazyVim.safe_keymap_set` IN YOUR OWN CONFIG!!
--- use `vim.keymap.set` instead
-local map = vim.keymap.set
-
--- better up/down
-map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-
--- Move to window using the <ctrl> hjkl keys
-map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
-
--- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
-
--- buffers
-map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>bd", function()
-  Snacks.bufdelete()
-end, { desc = "Delete Buffer" })
-map("n", "<leader>bo", function()
-  Snacks.bufdelete.other()
-end, { desc = "Delete Other Buffers" })
-map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+ -- Toggle copilot
+ vim.keymap.set("n", "<leader>gh", ":CopilotChat<CR>")
 
 
--- Clear search, diff update and redraw
--- taken from runtime/lua/_editor.lua
-map(
-  "n",
-  "<leader>ur",
-  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "Redraw / Clear hlsearch / Diff Update" }
-)
+ -- This file is automatically loaded by lazyvim.config.init
 
--- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
-map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
-map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
-map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+ -- DO NOT USE `LazyVim.safe_keymap_set` IN YOUR OWN CONFIG!!
+ -- use `vim.keymap.set` instead
+ local map = vim.keymap.set
 
--- Add undo break-points
-map("i", ",", ",<c-g>u")
-map("i", ".", ".<c-g>u")
-map("i", ";", ";<c-g>u")
+ -- better up/down
+ map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+ map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+ map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+ map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
--- save file
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+ -- Move to window using the <ctrl> hjkl keys
+ map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
+ map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+ map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+ map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
---keywordprg
-map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+ -- Resize window using <ctrl> arrow keys
+ map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+ map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+ map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
--- better indenting
-map("x", "<", "<gv")
-map("x", ">", ">gv")
-
--- commenting
-map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
-map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
-
--- lazy
-map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
-
--- new file
-map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
-
--- location list
-map("n", "<leader>xl", function()
-  local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
-  if not success and err then
-    vim.notify(err, vim.log.levels.ERROR)
-  end
-end, { desc = "Location List" })
-
--- quickfix list
-map("n", "<leader>xq", function()
-  local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
-  if not success and err then
-    vim.notify(err, vim.log.levels.ERROR)
-  end
-end, { desc = "Quickfix List" })
-
-map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
-map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+ -- buffers
+ map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+ map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+ map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+ map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+ map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+ map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+ map("n", "<leader>bd", function()
+   Snacks.bufdelete()
+ end, { desc = "Delete Buffer" })
+ map("n", "<leader>bo", function()
+   Snacks.bufdelete.other()
+ end, { desc = "Delete Other Buffers" })
+ map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
 
--- diagnostic
-local diagnostic_goto = function(next, severity)
-  return function()
-    vim.diagnostic.jump({
-      count = (next and 1 or -1) * vim.v.count1,
-      severity = severity and vim.diagnostic.severity[severity] or nil,
-      float = true,
-    })
-  end
-end
-map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+ -- Clear search, diff update and redraw
+ -- taken from runtime/lua/_editor.lua
+ map(
+   "n",
+   "<leader>ur",
+   "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+   { desc = "Redraw / Clear hlsearch / Diff Update" }
+ )
 
--- stylua: ignore start
+ -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+ map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
+ map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+ map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+ map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
+ map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+ map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
--- toggle options
-Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
-Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-Snacks.toggle.diagnostics():map("<leader>ud")
-Snacks.toggle.line_number():map("<leader>ul")
-Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
-Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" }):map("<leader>uA")
-Snacks.toggle.treesitter():map("<leader>uT")
-Snacks.toggle.option("background", { off = "light", on = "dark" , name = "Dark Background" }):map("<leader>ub")
-Snacks.toggle.dim():map("<leader>uD")
-Snacks.toggle.animate():map("<leader>ua")
-Snacks.toggle.indent():map("<leader>ug")
-Snacks.toggle.scroll():map("<leader>uS")
-Snacks.toggle.profiler():map("<leader>dpp")
-Snacks.toggle.profiler_highlights():map("<leader>dph")
+ -- Add undo break-points
+ map("i", ",", ",<c-g>u")
+ map("i", ".", ".<c-g>u")
+ map("i", ";", ";<c-g>u")
 
-if vim.lsp.inlay_hint then
-  Snacks.toggle.inlay_hints():map("<leader>uh")
-end
+ -- save file
+ map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
--- quit
-map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+ --keywordprg
+ map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 
--- highlights under cursor
-map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
-map("n", "<leader>uI", function() vim.treesitter.inspect_tree() vim.api.nvim_input("I") end, { desc = "Inspect Tree" })
+ -- better indenting
+ map("x", "<", "<gv")
+ map("x", ">", ">gv")
 
+ -- commenting
+ map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+ map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
+ -- lazy
+ map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
--- windows
-map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
-map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
-map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
-Snacks.toggle.zoom():map("<leader>wm"):map("<leader>uZ")
-Snacks.toggle.zen():map("<leader>uz")
+ -- new file
+ map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
--- tabs
-map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
-map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
-map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
-map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+ -- location list
+ map("n", "<leader>xl", function()
+   local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
+   if not success and err then
+     vim.notify(err, vim.log.levels.ERROR)
+   end
+ end, { desc = "Location List" })
+
+ -- quickfix list
+ map("n", "<leader>xq", function()
+   local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
+   if not success and err then
+     vim.notify(err, vim.log.levels.ERROR)
+   end
+ end, { desc = "Quickfix List" })
+
+ map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
+ map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+ -- diagnostic
+ local diagnostic_goto = function(next, severity)
+   return function()
+     vim.diagnostic.jump({
+       count = (next and 1 or -1) * vim.v.count1,
+       severity = severity and vim.diagnostic.severity[severity] or nil,
+       float = true,
+     })
+   end
+ end
+ map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+ map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+ map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+ map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+ map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
+ -- stylua: ignore start
+
+ -- toggle options
+ Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+ Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+ Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+ Snacks.toggle.diagnostics():map("<leader>ud")
+ Snacks.toggle.line_number():map("<leader>ul")
+ Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
+ Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" }):map("<leader>uA")
+ Snacks.toggle.treesitter():map("<leader>uT")
+ Snacks.toggle.option("background", { off = "light", on = "dark" , name = "Dark Background" }):map("<leader>ub")
+ Snacks.toggle.dim():map("<leader>uD")
+ Snacks.toggle.animate():map("<leader>ua")
+ Snacks.toggle.indent():map("<leader>ug")
+ Snacks.toggle.scroll():map("<leader>uS")
+ Snacks.toggle.profiler():map("<leader>dpp")
+ Snacks.toggle.profiler_highlights():map("<leader>dph")
+
+ if vim.lsp.inlay_hint then
+   Snacks.toggle.inlay_hints():map("<leader>uh")
+ end
+
+ -- quit
+ map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+
+ -- highlights under cursor
+ map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
+ map("n", "<leader>uI", function() vim.treesitter.inspect_tree() vim.api.nvim_input("I") end, { desc = "Inspect Tree" })
 
 
-vim.keymap.set("n", "<leader>df", function() require'jdtls'.test_class() end, { desc = "JDTLS Test Class" })
-vim.keymap.set("n", "<leader>dn", function() require'jdtls'.test_nearest_method() end, { desc = "JDTLS Test Nearest Method" })
+
+ -- windows
+ map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
+ map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
+ map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
+ Snacks.toggle.zoom():map("<leader>wm"):map("<leader>uZ")
+ Snacks.toggle.zen():map("<leader>uz")
+
+ -- tabs
+ map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+ map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
+ map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+ map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+ map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+
+ local builtin = require('telescope.builtin')
+ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+ vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+ vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+ vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+
+
+ vim.keymap.set("n", "<leader>df", function() require'jdtls'.test_class() end, { desc = "JDTLS Test Class" })
+ vim.keymap.set("n", "<leader>dn", function() require'jdtls'.test_nearest_method() end, { desc = "JDTLS Test Nearest Method" })
