@@ -1,11 +1,23 @@
+local function get_git_root()
+  -- Search for standard project markers like '.git'
+  local root_patterns = { ".git", "package.json", "setup.py", "pom.xml" } -- Add more markers if needed
+  local project_root = vim.fs.root(0, root_patterns)
+
+  if project_root then
+    return project_root
+  else
+    -- Fallback to current working directory if no specific root is found
+    return vim.loop.cwd()
+  end
+end
 return {
   "nvim-neo-tree/neo-tree.nvim",
   cmd = "Neotree",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "nvim-tree/nvim-web-devicons", -- optional, but recommended
-    },
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "MunifTanjim/nui.nvim",
+    "nvim-tree/nvim-web-devicons", -- optional, but recommended
+  },
   keys = {
     {
       "<leader>fe",
@@ -14,7 +26,15 @@ return {
       end,
       desc = "Explorer NeoTree (cwd)",
     },
+    {
+      "<leader>fE",
+      function()
+        require("neo-tree.command").execute({ toggle = true, dir = get_git_root() })
+      end,
+      desc = "Explorer NeoTree (cwd)",
+    },
     { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
+{ "<leader>E", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
     {
       "<leader>ge",
       function()
