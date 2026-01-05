@@ -34,7 +34,7 @@ return {
       desc = "Explorer NeoTree (cwd)",
     },
     { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
-{ "<leader>E", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
+{ "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
     {
       "<leader>ge",
       function()
@@ -75,11 +75,6 @@ return {
   opts = {
     sources = { "filesystem", "buffers", "git_status" },
     open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
-    filesystem = {
-      bind_to_cwd = false,
-      follow_current_file = { enabled = true },
-      use_libuv_file_watcher = true,
-    },
     window = {
       mappings = {
         ["l"] = "open",
