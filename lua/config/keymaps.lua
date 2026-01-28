@@ -190,5 +190,44 @@
  vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
 
- vim.keymap.set("n", "<leader>df", function() require'jdtls'.test_class() end, { desc = "JDTLS Test Class" })
- vim.keymap.set("n", "<leader>dn", function() require'jdtls'.test_nearest_method() end, { desc = "JDTLS Test Nearest Method" })
+vim.keymap.set("n", "<leader>df", function() require'jdtls'.test_class() end, { desc = "JDTLS Test Class" })
+vim.keymap.set("n", "<leader>dn", function() require'jdtls'.test_nearest_method() end, { desc = "JDTLS Test Nearest Method" })
+
+-- LSP keymaps
+map("n", "<leader>cl", function() Snacks.picker.lsp_config() end, { desc = "Lsp Info" })
+map("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" })
+map("n", "gr", vim.lsp.buf.references, { desc = "References", nowait = true })
+map("n", "gI", vim.lsp.buf.implementation, { desc = "Goto Implementation" })
+map("n", "gy", vim.lsp.buf.type_definition, { desc = "Goto T[y]pe Definition" })
+map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
+map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+map("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+map({ "n", "x" }, "<leader>cc", vim.lsp.codelens.run, { desc = "Run Codelens" })
+map("n", "<leader>cC", vim.lsp.codelens.refresh, { desc = "Refresh & Display Codelens" })
+map("n", "<leader>cR", function() Snacks.rename.rename_file() end, { desc = "Rename File" })
+map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+map("n", "<leader>cA", function()
+  vim.lsp.buf.code_action({
+    context = {
+      only = { "source" },
+      diagnostics = {},
+    },
+  })
+end, { desc = "Source Action" })
+map("n", "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "Next Reference" })
+map("n", "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Prev Reference" })
+map("n", "<a-n>", function() Snacks.words.jump(vim.v.count1, true) end, { desc = "Next Reference" })
+map("n", "<a-p>", function() Snacks.words.jump(-vim.v.count1, true) end, { desc = "Prev Reference" })
+
+-- Tmux navigation
+vim.keymap.set('n', '<C-h>', '<Cmd>NvimTmuxNavigateLeft<CR>', { silent = true })
+vim.keymap.set('n', '<C-j>', '<Cmd>NvimTmuxNavigateDown<CR>', { silent = true })
+vim.keymap.set('n', '<C-k>', '<Cmd>NvimTmuxNavigateUp<CR>', { silent = true })
+vim.keymap.set('n', '<C-l>', '<Cmd>NvimTmuxNavigateRight<CR>', { silent = true })
+vim.keymap.set('n', '<C-\\>', '<Cmd>NvimTmuxNavigateLastActive<CR>', { silent = true })
+vim.keymap.set('n', '<C-Space>', '<Cmd>NvimTmuxNavigateNext<CR>', { silent = true })
+
+map("n", '<leader>fs', '<Cmd>FzfLua lsp_document_symbols<CR>')
+map("n", '<leader>fS', '<Cmd>FzfLua lsp_live_workspace_symbols<CR>')
